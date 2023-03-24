@@ -1,7 +1,7 @@
+import { Country } from './../interfaces/pais.interface';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs';
-import { Country } from '../interfaces/pais.interface';
 
 
 
@@ -10,7 +10,7 @@ import { Country } from '../interfaces/pais.interface';
 })
 export class PaisService {
 
-  private apiUrl: string = 'https://restcountries.com/v3.1'
+  private apiUrl: string = 'https://restcountries.com/v2'
   constructor(private http: HttpClient) { }
 
   buscarPais(termino:string) : Observable<Country[]>{
@@ -26,6 +26,11 @@ export class PaisService {
   getPaisAplha(termino:string) : Observable<Country>{
     const url = `${this.apiUrl}/alpha/${termino}`;
     return this.http.get<Country>(url);
+  }
+
+  getPorRegion (termino: string) : Observable<Country[]>{
+    const url  = `${this.apiUrl}/regionalbloc/${termino}`;
+    return this.http.get<Country[]>(url);
   }
 
 
